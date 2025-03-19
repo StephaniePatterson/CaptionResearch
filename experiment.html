@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Caption Haptics Experiment</title>
+        <script src="jspsych/jspsych.js"></script>
+        <script src="jspsych/plugin-html-keyboard-response.js"></script>
+        <script src="jspsych/plugin-html-slider-response.js"></script>
+        <script src="jspsych/plugin-survey-likert.js"></script>
+        <script src="jspsych/plugin-image-keyboard-response.js"></script>
+        <script src="jspsych/plugin-audio-button-response.js"></script>
+        <script src="jspsych/plugin-audio-keyboard-response.js"></script>
+        <script src="jspsych/plugin-audio-slider-response.js"></script>
+        <link href="jspsych/jspsych.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body></body>
+    <script>
+        const jsPsych = initJsPsych();
+
+        var timeline = [];
+
+        var instructions = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: `
+                <p>Welcome! In this experiment, you will design haptic signals for different emotional content in captions.</p>
+                <p>You can modify these properties of the haptic signal:</p>
+                <p>[explanations of properties that can be changed: frequency, intensity, duration, waveform type]</p>
+                <p>Press any key to begin.</p>
+            `
+        };
+
+        timeline.push(instructions);
+
+        var scale = ["Very low", "Low", "Medium", "High", "Very high"];
+
+        var designHaptic1 = {
+            type: jsPsychSurveyLikert,
+            preamble: `
+            <h2>Please choose the haptic settings you feel match best with sadness.</h2>
+            <p>[insert haptic signal player here]<p>
+            `,
+            questions: [
+                {prompt: "Frequency", name: 'Frequency', labels: scale},
+                {prompt: "Duration", name: 'Duration', labels: scale},
+                {prompt: "Intensity", name: 'Intensity', labels: scale}
+            ]
+        };
+        
+        timeline.push(designHaptic1);
+        
+
+        jsPsych.run(timeline);
+    </script>
+</html>

@@ -1,0 +1,10 @@
+{
+    "chuck_script": "./chuckScripts/hapticize.ck",
+    "default_intensity": 50,
+    "default_window": 250,  
+    "udp_ip": "127.0.0.1", 
+    "udp_port": 6449,
+    "sendPitch": true,
+    "sendIntensity": false
+    
+}
