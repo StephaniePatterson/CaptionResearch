@@ -50,6 +50,8 @@ while (true) {
     }
 }
 
+//i should have two different threads to keep track of pitch and loudness
+
 
 
 
