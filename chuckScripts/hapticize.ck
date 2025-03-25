@@ -32,19 +32,19 @@ now => time lastLoudnessCheck;
 10::ms => dur checkrate;
 
 spork ~ watchsilence();
+spork ~ watchloudness();
 
 while (true) {
     pitch_event => now;
-    loudness_event => now;
-    while (pitch_event.nextMsg() && loudness_event.nextMsg()) {
+    while (pitch_event.nextMsg()) {
         now => lastMessage;
         pitch_event.getFloat() => float newpitch;
-        loudness_event.getFloat() => float newgain;
+        
         //ADD THRESHOLD THING HERE
         <<< "Received pitch:", newpitch, "at time", now >>>;
-        <<< "Received gain:", newgain >>>;
+        
         newpitch => s.freq;
-        newgain => g.gain;
+        
         //s => g => wavOut => dac;
         duration::ms => now;
     }
@@ -52,10 +52,21 @@ while (true) {
 
 //i should have two different threads to keep track of pitch and loudness
 
-
-
-
 wavOut.closeFile();
+
+fun void watchloudness() {
+    while (true) {
+        loudness_event => now;
+        while (loudness_event.nextMsg()) {
+            now => lastMessage;
+            loudness_event.getFloat() => float newgain;
+            <<< "Received gain:", newgain >>>;
+            newgain => g.gain;
+            duration::ms => now;
+        }
+    }
+
+}
 
 //Function that silences sound when no signal has been received
 fun void watchsilence() {
