@@ -1,16 +1,23 @@
+// Set up oscillator structure
 SinOsc s => Gain g => WvOut wavOut => dac;  
-"output.wav" => wavOut.wavFilename;
+
+"output.wav" => wavOut.wavFilename; // file to store output
+
+// Initialize oscrecv object
 OscRecv recv;
 6449 => recv.port;
 recv.listen();
 
+// Osc message listener
 OscIn oin;
 OscMsg msg;
 oin.listenAll();
 
+// Event to receive modulation parameters (not currently using)
 OscEvent config_event;
 recv.event("/modulation/bundle, f, f, i, i, s") @=> config_event;
 
+// Initialize parameters
 float intensityFactor;
 float pitchFactor;
 int window;
@@ -18,6 +25,7 @@ int duration;
 string shape;
 <<< "Hello" >>>;
 
+// Initialize OscEvents to receive pitch and loudness
 OscEvent pitch_event;
 OscEvent loudness_event;
 recv.event("/pitch, f") @=> pitch_event;
@@ -31,9 +39,10 @@ now => time lastPitchCheck;
 now => time lastLoudnessCheck;
 10::ms => dur checkrate;
 
-spork ~ watchsilence();
-spork ~ watchloudness();
+spork ~ watchsilence(); // Start watchsilence func
+spork ~ watchloudness(); // Start watchloudness func
 
+// Main loop: wait for pitch events and then update output wave
 while (true) {
     pitch_event => now;
     while (pitch_event.nextMsg()) {
@@ -50,10 +59,10 @@ while (true) {
     }
 }
 
-//i should have two different threads to keep track of pitch and loudness
 
 wavOut.closeFile();
 
+// Function to wait for loudness events
 fun void watchloudness() {
     while (true) {
         loudness_event => now;
