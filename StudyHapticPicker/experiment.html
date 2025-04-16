@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Caption Haptics Experiment</title>
+        <script src="https://unpkg.com/jspsych@8.2.1"></script>
+        <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+        <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+        <link href="https://unpkg.com/jspsych@8.2.1/css/jspsych.css" rel="stylesheet" type="text/css" />
+        <!-- <script src="jspsych/jspsych.js"></script>
+        <script src="jspsych/plugin-html-keyboard-response.js"></script>
+        <script src="jspsych/plugin-html-slider-response.js"></script>
+        <script src="jspsych/plugin-survey-likert.js"></script>
+        <script src="jspsych/plugin-image-keyboard-response.js"></script>
+        <script src="jspsych/plugin-audio-button-response.js"></script>
+        <script src="jspsych/plugin-audio-keyboard-response.js"></script>
+        <script src="jspsych/plugin-audio-slider-response.js"></script>
+        <link href="jspsych/jspsych.css" rel="stylesheet" type="text/css" /> -->
+    </head>
+    <body></body>
+    <script>
+        var jsPsych = initJsPsych({
+            on_finish: function() {
+                jsPsych.data.displayData();
+            },
+            override_safe_mode: true
+            });
+
+        var timeline = [];
+
+        var instructions = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: `
+                <p>Welcome! In this experiment, you will select the haptic signal that best matches each clip of speech.</p>
+                <p>In each trial, you will see a face showing the emotion of the speaker. The text shows what the speaker is saying.</p>
+                <p>Then, you will be asked to choose the haptic signal that best matches the emotion of the speaker.</p>
+            `
+        };
+
+        timeline.push(instructions);
+
+        var stimuli = [
+            { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/happy.jpg" alt="A man's smiling face." style="width: 400px; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/angry.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../output.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../output2.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `},
+            { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/anger.jpg" alt="A woman frowning." style="width: 400; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/angry.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../chuckScripts/output.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../chuckScripts/output2.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `},
+            { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/disgust.jpg" alt="disgust" style="width: 400px; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/angry.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../output.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../output2.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `},
+            { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/fear.jpg" alt="fear" style="width: 400px; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/angry.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../output.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../output2.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `},
+            { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/sadness.jpg" alt="sad" style="width: 400px; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/angry.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../output.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../output2.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `},
+            { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/surprise.jpg" alt="surprise" style="width: 400px; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/angry.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../output.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../output2.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `}
+        ]
+
+        var hapticChoice = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: jsPsych.timelineVariable('stimulus'),
+            prompt: `Which haptic pattern best matches the emotion?`,
+            choices: ["Option 1 (left)", "Option 2 (right)"], // Use simple button labels
+            data: {
+                emotion: 'happy',
+                utterance_id: '1'
+            }
+        };
+
+        var procedure = {
+            timeline: [hapticChoice],
+            timeline_variables: stimuli,
+            randomize_order: true
+        }
+
+        timeline.push(procedure);
+
+        var debrief_block = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function() {
+
+                var trials = jsPsych.data.get().filter({task: 'response'});
+                var correct_trials = trials.filter({correct: true});
+                var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+                var rt = Math.round(correct_trials.select('rt').mean());
+
+                return `<p>You responded correctly on ${accuracy}% of the trials.</p>
+                <p>Your average response time was ${rt}ms.</p>
+                <p>Press any key to complete the experiment. Thank you!</p>`;
+
+            }
+        };
+
+        timeline.push(debrief_block);
+
+        // var designHaptic1 = {
+        //     type: jsPsychSurveyLikert,
+        //     preamble: `
+        //     <h2>Please choose the haptic settings you feel match best with sadness.</h2>
+        //     <p>[insert haptic signal player here]<p>
+        //     `,
+        //     questions: [
+        //         {prompt: "Frequency", name: 'Frequency', labels: scale},
+        //         {prompt: "Duration", name: 'Duration', labels: scale},
+        //         {prompt: "Intensity", name: 'Intensity', labels: scale}
+        //     ]
+        // };
+        
+        // timeline.push(designHaptic1);
+        
+
+        jsPsych.run(timeline);
+    </script>
+</html>

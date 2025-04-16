@@ -40,22 +40,28 @@ now => time lastLoudnessCheck;
 10::ms => dur checkrate;
 
 spork ~ watchsilence(); // Start watchsilence func
-spork ~ watchloudness(); // Start watchloudness func
+//spork ~ watchloudness(); // Start watchloudness func
 
 // Main loop: wait for pitch events and then update output wave
 while (true) {
     pitch_event => now;
-    while (pitch_event.nextMsg()) {
+    loudness_event => now;
+    while (pitch_event.nextMsg() && loudness_event.nextMsg()) {
         now => lastMessage;
         pitch_event.getFloat() => float newpitch;
-        
+        loudness_event.getFloat() => float newgain;
         //ADD THRESHOLD THING HERE
+        //if (newpitch - s.freq > 10) {
+        //    <<< "Threshold", newpitch >>>;
+        //    newpitch => s.freq;
+        //}
         <<< "Received pitch:", newpitch, "at time", now >>>;
-        
+        <<< "Received gain:", newgain >>>;
+        newgain => g.gain;
         newpitch => s.freq;
         
         //s => g => wavOut => dac;
-        duration::ms => now;
+        //duration::ms => now;
     }
 }
 
@@ -70,7 +76,7 @@ fun void watchloudness() {
             now => lastMessage;
             loudness_event.getFloat() => float newgain;
             <<< "Received gain:", newgain >>>;
-            newgain => g.gain;
+            //newgain => g.gain;
             duration::ms => now;
         }
     }
