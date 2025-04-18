@@ -1,5 +1,5 @@
 // Set up oscillator structure
-SinOsc s => Gain g => WvOut wavOut => dac;  
+SawOsc s => Gain g => WvOut wavOut => dac;  
 
 "output.wav" => wavOut.wavFilename; // file to store output
 
@@ -57,7 +57,7 @@ while (true) {
         //}
         <<< "Received pitch:", newpitch, "at time", now >>>;
         <<< "Received gain:", newgain >>>;
-        spork ~ pulse_gain(newgain);
+        newgain => g.gain;
         newpitch => s.freq;
         
         //s => g => wavOut => dac;
@@ -67,17 +67,6 @@ while (true) {
 
 
 wavOut.closeFile();
-
-fun void pulse_gain(float maxGain) {
-    1 => int pulses;
-    100::ms => dur pulseDur;
-    for (0 => int i; i < pulses; i++) {
-        maxGain => g.gain;
-        pulseDur => now;
-        0 => g.gain;
-        pulseDur => now;
-    }
-}
 
 // Function to wait for loudness events
 fun void watchloudness() {

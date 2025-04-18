@@ -26,21 +26,25 @@ while (true) {
         float newgain;
         pitch_event.getFloat() => newpitch;
         loudness_event.getFloat() => newgain;
+        newgain => g.gain;
         
         <<< "Pitch:", newpitch, "Gain:", newgain >>>;
 
         // Emotional mapping logic: determine emotion type
         if (newpitch < 100) {
             // Low pitch -> sadness or calm
-            newgain * 0.5 => g.gain;  // softer response than normal
-            (100 / newpitch) * 50 => s.freq; // lower frequencies for calm emotions
+            <<< "low" >>>;
+            //newgain * 0.5 => g.gain;  // softer response than normal
+            newpitch * 0.5 => s.freq; // lower frequencies for calm emotions
         } else if (newpitch > 120) {
             // High pitch -> excitement, fear
-            newgain * 1.5 => g.gain;  // stronger response than normal
-            (200 / newpitch) * 250 => s.freq; // higher frequencies for excitement
+            <<< "high" >>>;
+            //newgain * 1.5 => g.gain;  // stronger response than normal
+            newpitch * 1.5 => s.freq; // higher frequencies for excitement
         } else {
             // Mid pitch -> neutral, stable emotion
-            newgain => g.gain;  // normal response
+            <<< "mid" >>>;
+            //newgain => g.gain;  // normal response
             newpitch => s.freq;  // direct mapping to frequency
         }
 

@@ -38,6 +38,88 @@
 
         timeline.push(instructions);
 
+        var neutral_stimuli = [
+        { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/surprise.jpg" alt="A woman frowning." style="width: 400; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/neutral.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../hapticAudio/neutralNormal.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../hapticAudio/neutralExaggerate.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `},
+            { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/surprise.jpg" alt="A woman frowning." style="width: 400; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/neutral.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../hapticAudio/neutralPulse.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../hapticAudio/neutralSaw.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `}
+        ]
+
+        var angry_stimuli = [
+        { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/anger.jpg" alt="A woman frowning." style="width: 400; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/angry.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../../hapticAudio/angryNormal.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../../hapticAudio/angryExaggerate.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `},
+            { stimulus: `
+                <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
+                <img src="facepics/anger.jpg" alt="A woman frowning." style="width: 400; height: auto;"><br>
+                <audio id="speech" controls>
+                    <source src="../audio/angry.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>[cc] The kids are talking at the door.</p>
+                <p>Which of the following haptic patterns best matches the emotion of the speaker?</p>
+                <p>Feel each haptic signal (you can replay it):</p>
+                <audio id="haptic-option1" controls>
+                    <source src="../../hapticAudio/angryPulse.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="haptic-option2" controls>
+                    <source src="../../hapticAudio/angrySaw.wav" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            `}
+        ]
+
         var stimuli = [
             { stimulus: `
                 <p>Play the spoken English sentence and read the caption. The image displayed will indicate the emotions of the speaker.</p>
@@ -168,7 +250,7 @@
 
         var procedure = {
             timeline: [hapticChoice],
-            timeline_variables: stimuli,
+            timeline_variables: neutral_stimuli,
             randomize_order: true
         }
 
