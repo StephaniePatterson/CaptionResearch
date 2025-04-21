@@ -6,6 +6,6 @@
     "udp_port": 6449,
     "sendPitch": true,
     "sendIntensity": false,
-    "audio_file": "./audio/angry.wav"
+    "audio_file": "./audio/sad.wav"
     
 }
